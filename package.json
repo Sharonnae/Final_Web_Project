@@ -1,38 +1,31 @@
 {
-  "name": "nhs-app",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "open": "nodemon server.js",
+    "start": "start http://localhost:8000& npm run open"
   },
-  "engines": {
-    "node": "6.9.1"
-  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.17.0",
-    "connect-flash": "^0.1.1",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.14.1",
-    "express-handlebars": "^3.0.0",
-    "express-messages": "^1.0.1",
-    "express-session": "^1.15.1",
-    "express-validator": "^3.1.2",
-    "hbs": "^4.0.1",
-    "is-valid-date": "0.0.1",
-    "lodash": "^4.17.4",
-    "mongodb": "^2.2.24",
-    "mongoose": "^4.8.5",
-    "passport": "^0.3.2",
-    "passport-http": "^0.3.0",
-    "passport-local": "^1.0.0",
-    "serve-favicon": "^2.4.1"
-  },
-  "devDependencies": {
-    "nodemon": "^1.11.0"
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.6",
+    "express": "^4.18.1",
+    "express-fileupload": "^1.4.0",
+    "express-session": "^1.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.7.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^2.0.19",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0"
   }
 }
