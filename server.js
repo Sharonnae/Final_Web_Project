@@ -23,7 +23,10 @@ const PORT = process.env.PORT || 8000;
 
 app.use('/', require('./routes/home'));
 app.use('/login', require('./routes/auth/login'));
+app.use('/logout', require('./routes/auth/logout'));
 app.use('/signup', require('./routes/auth/signup'));
+app.use('/doctor', require('./routes/doctor'))
+app.use('/patient', require('./routes/patient'))
 
 app.listen(PORT, function () {
     console.log(`Server has started at port ${PORT}`);

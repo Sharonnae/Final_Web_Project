@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Profile</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"
+        integrity="sha256-PF6MatZtiJ8/c9O9HQ8uSUXr++R9KBYu4gbNG5511WE=" crossorigin="anonymous" />
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/doctor.css">
+
+</head>
+
+<body>
+    <header id="nav-wrapper">
+        <nav id="nav">
+            <div class="nav left">
+                <span class="gradient skew">
+                    <h1 class="logo un-skew"><a href="/patient">HMS</a></h1>
+                </span>
+                <button id="menu" class="btn-nav"><span class="fas fa-bars"></span></button>
+            </div>
+            <div class="nav right">
+                <a href="/patient" class="nav-link"><span class="nav-link-span"><span
+                            class="u-nav">Dashboard</span></span></a>
+                <a href="/patient/profile" class="nav-link active"><span class="nav-link-span"><span
+                            class="u-nav">Profile</span></span></a>
+                <a href="/logout" class="nav-link"><span class="nav-link-span"><span
+                            class="u-nav">Logout</span></span></a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="wrapper">
+                <div class="cctabs">
+                    <input checked id="one" name="tabs" type="radio">
+                    <label for="one"><i class="fas fa-user"></i> Account</label>
+                    <input id="two" name="tabs" type="radio" value="Two">
+                    <label for="two"><i class="fas fa-unlock-alt"></i> Security</label>
+                    <input id="three" name="tabs" type="radio">
+                    <label for="three"><i class="fas fa-info-circle"></i> Info</label>
+                    <input id="four" name="tabs" type="radio">
+                    <label for="four"><i class="fas fa-signal"></i> Status</label>
+                    <div class="panels">
+                        <div class="panel">
+                            <div class="d-flex justify-content-start align-items-center">
+                                <div class="profile_image_box">
+                                    <input type="file" hidden>
+                                    <img src="/avatar/female.png">
+                                </div>
+                                <div class="d-flex flex-column align-items ml-4">
+                                    <div class="d-flex justify-content-start mb-4">
+                                        <button class="btn btn-success mr-4">UPLOAD NEW PHOTO</button>
+                                        <button class="btn btn-secondary">RESET</button>
+                                    </div>
+                                    <div style="font-size: 12px; color: gray;">
+                                        Allowed PNG or JPEG. Max size of 800K.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column mt-4">
+                                <input type="text" class="form-control mb-4" id="inputPassword" placeholder="name">
+                                <input type="email" class="form-control mb-4" id="inputPassword" placeholder="email">
+                                <input type="text" class="form-control mb-4" id="inputPassword" placeholder="role">
+                            </div>
+
+                            <div class="d-flex justify-content-start">
+                                <button class="btn btn-success mr-4">SAVE CHANGES</button>
+                                <button class="btn btn-secondary">RESET</button>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="d-flex flex-column">
+                                <div class="form-group d-flex flex-column">
+                                    <label class="control-label">Current Password</label>
+                                    <div>
+                                        <input id="password-field" type="password" class="form-control"
+                                            placeholder="Current Password" name="password">
+                                        <span toggle="#password-field"
+                                            class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group d-flex flex-column">
+                                    <label class="control-label">New Password</label>
+                                    <div>
+                                        <input id="password-field" type="password" class="form-control"
+                                            placeholder="New Password" name="password">
+                                        <span toggle="#password-field"
+                                            class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group d-flex flex-column">
+                                    <label class="control-label">Confirm Password</label>
+                                    <div>
+                                        <input id="password-field" type="password" class="form-control"
+                                            placeholder="Confirm Password" name="password">
+                                        <span toggle="#password-field"
+                                            class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-start">
+                                    <button class="btn btn-success mr-4">SAVE CHANGES</button>
+                                    <button class="btn btn-secondary">RESET</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="row">
+                                <div class="col-sm-8 d-flex flex-column">
+                                    <input type="number" class="form-control mb-4" id="inputPassword" placeholder="phone">
+                                    <input type="text" class="form-control mb-4" id="inputPassword" placeholder="gender">
+                                    <input type="text" class="form-control mb-4" id="inputPassword" placeholder="location">    
+                                    <div class="d-flex justify-content-start mt-4">
+                                        <button class="btn btn-success mr-4">SAVE CHANGES</button>
+                                        <button class="btn btn-secondary">RESET</button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div style="position: relative; width: 100%; padding-bottom: 100%;">
+                                        <div id="map" style="position: absolute; top: 0; left: 0; bottom: 0; width: 100%; height: 100%;">
+                                        </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="d-flex flex-column">
+                                <div class="p-3 mt-2"
+                                  style="width: 100%; min-width: 600px; border-radius: 8px; background-color: #79ccc2; color: white; font-size: 16px; font-weight: 500;">
+                                  <div class="row">
+                                    <div class="col-3" style="box-sizing: border-box;">Doctor Name</div>
+                                    <div class="col-2">Gender</div>
+                                    <div class="col-2">Disease</div>
+                                    <div class="col-3">Phone</div>
+                                    <div class="col-2">Status</div>
+                                  </div>
+                                </div>
+                                <div class="p-3 mt-2"
+                                  style="width: 100%; min-width: 600px; border-radius: 8px; background-color: rgb(64 66 65); color: white;">
+                                  <div class="row">
+                                    <div class="col-3 d-flex align-items-center">
+                                      <div class="mr-2" style="border-radius: 50%; width: 40px; height: 40px; overflow: hidden;">
+                                        <img src="/avatar/female.png" style="width: 100%; height: 100%;">
+                                      </div>
+                                      <a href="#" style="text-decoration: underline;">Lisa</a>
+                                    </div>
+                                    <div class="col-2 d-flex align-items-center">
+                                      female
+                                    </div>
+                                    <div class="col-2 d-flex align-items-center">
+                                      Paris
+                                    </div>
+                                    <div class="col-3 d-flex align-items-center">
+                                      1111111
+                                    </div>
+                                    <div class="col-2 d-flex align-items-center">
+                                        Accepted
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class="p-3 mt-2"
+                                style="width: 100%; min-width: 600px; border-radius: 8px; background-color: rgb(64 66 65); color: white;">
+                                <div class="row">
+                                  <div class="col-3 d-flex align-items-center">
+                                    <div class="mr-2" style="border-radius: 50%; width: 40px; height: 40px; overflow: hidden;">
+                                      <img src="/avatar/female.png" style="width: 100%; height: 100%;">
+                                    </div>
+                                    <a href="#" style="text-decoration: underline;">Lisa</a>
+                                  </div>
+                                  <div class="col-2 d-flex align-items-center">
+                                    female
+                                  </div>
+                                  <div class="col-2 d-flex align-items-center">
+                                    Paris
+                                  </div>
+                                  <div class="col-3 d-flex align-items-center">
+                                    1111111
+                                  </div>
+                                  <div class="col-2 d-flex align-items-center">
+                                      Accepted
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="p-3 mt-2"
+                              style="width: 100%; min-width: 600px; border-radius: 8px; background-color: rgb(64 66 65); color: white;">
+                              <div class="row">
+                                <div class="col-3 d-flex align-items-center">
+                                  <div class="mr-2" style="border-radius: 50%; width: 40px; height: 40px; overflow: hidden;">
+                                    <img src="/avatar/female.png" style="width: 100%; height: 100%;">
+                                  </div>
+                                  <a href="#" style="text-decoration: underline;">Lisa</a>
+                                </div>
+                                <div class="col-2 d-flex align-items-center">
+                                  female
+                                </div>
+                                <div class="col-2 d-flex align-items-center">
+                                  Paris
+                                </div>
+                                <div class="col-3 d-flex align-items-center">
+                                  1111111
+                                </div>
+                                <div class="col-2 d-flex align-items-center">
+                                    Accepted
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="p-3 mt-2"
+                            style="width: 100%; min-width: 600px; border-radius: 8px; background-color: rgb(64 66 65); color: white;">
+                            <div class="row">
+                              <div class="col-3 d-flex align-items-center">
+                                <div class="mr-2" style="border-radius: 50%; width: 40px; height: 40px; overflow: hidden;">
+                                  <img src="/avatar/female.png" style="width: 100%; height: 100%;">
+                                </div>
+                                <a href="#" style="text-decoration: underline;">Lisa</a>
+                              </div>
+                              <div class="col-2 d-flex align-items-center">
+                                female
+                              </div>
+                              <div class="col-2 d-flex align-items-center">
+                                Paris
+                              </div>
+                              <div class="col-3 d-flex align-items-center">
+                                1111111
+                              </div>
+                              <div class="col-2 d-flex align-items-center">
+                                  Accepted
+                                </div>
+                            </div>
+                          </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="/js/doctor.js"></script>
+    <script src="/js/navbar.js"></script>
+
+    <script>
+        function Map123() {
+            let mapOptions = {
+                center: new google.maps.LatLng(51.508742, -0.120850),
+                zoom: 5,
+                mapTypeId: google.maps.MapTypeId.HYBRID
+            }
+            let map = new google.maps.Map(document.getElementById("map"), mapOptions);
+            let marker = new google.maps.Marker({
+                position: map.getCenter(),
+                map: map
+            })
+        }  
+    </script>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5-mJU8x096rUj4O9xWNv8MLXTJEHiOWc&callback=Map123"></script>  
+
+</body>
+
+</html>

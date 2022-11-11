@@ -28,11 +28,19 @@ const loginUser = async (req, res) => {
                         expiresIn: "10h"
                     }
                 )
-                res.render('home', {
-                    status: 'success',
-                    token: token,
-                    role: role
-                })
+                if (user.role === 'admin') {
+
+                } else if (user.role === 'doctor') {
+                    res.render('doctorDashboard', {
+                        status: 'success',
+                        token: token
+                    })
+                } else if (user.role === 'patient') {
+                    res.render('patientDashboard', {
+                        status: 'success',
+                        token: token
+                    })
+                }
             } else {
                 res.render('login', {
                     status: 'wrongPwd'
