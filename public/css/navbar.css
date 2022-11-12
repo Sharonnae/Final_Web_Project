@@ -201,6 +201,10 @@ a:hover {
     background: linear-gradient(45deg, #fff, #ddd);
   }
 }
+
+.btn {
+  vertical-align: baseline !important;
+}
 @keyframes logo-hover {
   20% {
     padding-right: 0em;

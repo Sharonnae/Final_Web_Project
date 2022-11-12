@@ -1,16 +1,14 @@
-const express = require('express');
-const { 
-    adminView,
-    productView,
-    uploadFiles,
-    addProduct
-} = require('../controllers/adminController');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
+const {
+    adminDashboardView,
+    adminDoctorManageView,
+    adminPatientManageView
+} = require('../controllers/adminController')
 
-router.get('/', adminView);
-router.get('/products', productView);
 
-router.post('/addProduct', addProduct);
-router.post('/upload_files', uploadFiles);
+router.get('/', adminDashboardView)
+router.get('/doctor-manage', adminDoctorManageView)
+router.get('/patient-manage', adminPatientManageView)
 
-module.exports = router;
+module.exports = router

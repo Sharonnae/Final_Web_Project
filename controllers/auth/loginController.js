@@ -15,7 +15,7 @@ const loginUser = async (req, res) => {
     const user = await User.findOne({ email: email })
 
     if (user) {
-        bcrypt.compare(password, user.password, (err, data) => {
+        bcrypt.compare(password, user.password, async (err, data) => {
             if (err) throw err
             if (data) {
                 const token = JWT.sign(
@@ -29,16 +29,21 @@ const loginUser = async (req, res) => {
                     }
                 )
                 if (user.role === 'admin') {
-
+                    res.render('adminDashboard', {
+                        status: 'success',
+                        token: token
+                    })
                 } else if (user.role === 'doctor') {
                     res.render('doctorDashboard', {
                         status: 'success',
                         token: token
                     })
                 } else if (user.role === 'patient') {
+                    const doctors = await User.find({ role: 'doctor' })
                     res.render('patientDashboard', {
                         status: 'success',
-                        token: token
+                        token: token,
+                        doctors: doctors
                     })
                 }
             } else {

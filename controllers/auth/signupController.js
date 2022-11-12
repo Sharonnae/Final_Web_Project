@@ -12,8 +12,6 @@ const signupUser = async (req, res) => {
 
     const oldUser = await User.findOne({ email: email })
 
-    console.log('a', oldUser)
-
     if (oldUser) {
         res.render('signup', {
             status: 'alreadyExist'
@@ -28,6 +26,7 @@ const signupUser = async (req, res) => {
             longitude: longitude,
             phone: phone,
             gender: gender,
+            avatar: gender === 'male' ? 'male.png' : 'female.png',
             role: role
         })
 
