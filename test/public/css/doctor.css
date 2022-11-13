@@ -1,0 +1,110 @@
+/*
+Author: https://codeconvey.com/
+*/
+
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+main {
+	color: #000;
+	font-weight: 400;
+	font-size: 1em;
+	font-family: 'Lato', Arial, sans-serif;
+	margin:0;
+	padding:0;
+	padding-bottom:40px;
+}
+
+*, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+a, button {
+	outline: none;
+}
+
+.wrapper{
+	margin:0 auto;	
+	padding-left: 20px;
+	padding-right:20px;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600);
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../fonts/fontawesome-webfont.eot?v=4.0.3');
+  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.0.3') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff?v=4.0.3') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.0.3') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.cctabs {
+    width: 100%;
+    margin: 100px auto;
+}
+.cctabs input[type="radio"] {
+    opacity: 0;
+}
+.cctabs .fas{
+	margin-right:5px;	
+}
+.cctabs > label {
+    color: #000;
+    cursor: pointer;
+    float: left;
+    margin-right: 2px;
+    padding: 10px 20px;
+	font-size:16px;
+	font-weight:bold;
+    margin-bottom: 0px !important;
+}
+.cctabs > label:hover {
+    border-radius: 5px 5px 0px 0px;
+    background: #d9d9d9;
+}
+.cctabs input:checked + label {
+    background: #d9d9d9;
+    color: #a621ee;
+    border-radius: 5px 5px 0px 0px;
+}
+.cctabs input:nth-of-type(1):checked ~ .panels .panel:first-child, .cctabs input:nth-of-type(2):checked ~ .panels .panel:nth-child(2), .cctabs input:nth-of-type(3):checked ~ .panels .panel:nth-child(3), .cctabs input:nth-of-type(4):checked ~ .panels .panel:last-child {
+    opacity: 1;
+    -webkit-transition: .3s;
+	/*position:relative;*/
+	z-index:999;
+}
+.cctabs .panels {
+    float: left;
+    clear: both;
+    position: relative;
+    width: 100%;
+    background: #d9d9d9;
+}
+.cctabs .panel {
+    width: 100%;
+    opacity: 0;
+    position: absolute;
+    background: #d9d9d9;
+    padding: 4%;
+    box-sizing: border-box;
+    border-radius: 0px 0px 5px 5px;
+}
+
+.profile_image_box {
+    width: 130px;
+    height: 130px;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.profile_image_box img {
+    width: 100%;
+    height: 100%;
+}
+
+.field-icon {
+    float: right;
+    margin-left: -25px;
+    margin-top: -25px;
+    position: relative;
+    z-index: 2;
+  }

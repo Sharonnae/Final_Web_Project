@@ -38,16 +38,47 @@
   </header>
   <main>
     <div class="p-4">
-      <h2 style="margin-top: 50px;">Doctor Details</h2>
-      <div class="d-flex flex-column mt-4">
+      <div class="d-flex justify-content-between" style="margin-top: 70px;">
+        <h2>Doctor Lists</h2>
+        <button class="btn btn-primary d-flex justify-content-around align-items-center" data-toggle="modal" data-target="#filterList" style="width: 100px;">
+          <i class="fas fa-filter"></i> Filter
+        </button>
+        <div class="modal fade" id="filterList" tabindex="-1" role="dialog" aria-labelledby="filterList" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background-color: #79ccc2;">
+              <div class="modal-body">
+                <h5 style="color: white; font-weight: bold;">Filter Options</h5>
+                  <input type="text" class="form-control mt-4 mb-2" placeholder="Search...">
+                  <label class="form-control-label" style="color: white;">Sort by expertise</label>
+                  <select class="form-control mb-2">
+                    <option>Choose order type</option>
+                    <option>ASC</option>
+                    <option>DESC</option>
+                  </select>
+                  <label class="form-control-label" style="color: white;">Sort by location</label>
+                  <select class="form-control mb-2">
+                    <option>Choose order type</option>
+                    <option>ASC</option>
+                    <option>DESC</option>
+                  </select>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+      <div class="d-flex flex-column mt-2">
         <div class="p-3 mt-2"
           style="width: 100%; min-width: 600px; border-radius: 8px; background-color: #79ccc2; color: white; font-size: 16px; font-weight: 500;">
           <div class="row">
             <div class="col-3" style="box-sizing: border-box;">Doctor Name</div>
-            <div class="col-2">Gender</div>
+            <div class="col-2">Expertise</div>
             <div class="col-3">Location</div>
             <div class="col-2">Phone</div>
-            <div class="col-2">Action</div>
+            <div class="col-2">Appointment</div>
           </div>
         </div>
         <% if (doctors.length === 0) { %>
@@ -64,7 +95,7 @@
               <a href="#" style="text-decoration: underline;"><%= doctor.fullname %></a>
             </div>
             <div class="col-2 d-flex align-items-center">
-              <%= doctor.gender %>
+              <%= doctor.expertise %>
             </div>
             <div class="col-3 d-flex align-items-center">
               <%= doctor.location %>
@@ -73,8 +104,8 @@
               <%= doctor.phone %>
             </div>
             <div class="col-2 d-flex align-items-center">
-                <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#disease<%= doctor._id %>">
-                    follow
+                <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#disease<%= doctor._id %>">
+                    Suggest
                   </button>
                   
                   <!-- Modal -->
@@ -82,12 +113,12 @@
                     <div class="modal-dialog" role="document">
                       <div class="modal-content" style="background-color: #79ccc2;">
                         <div class="modal-body">
-                            <label class="form-control-label">Please input your disease</label>
-                          <input type="text" class="form-control">
+                            <label class="form-control-label">Please input available time</label>
+                          <input type="datetime-local" id="appointment<%= doctor._id %>" class="form-control">
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-success btn-sm">Submit</button>
+                          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="setAppointment('<%= doctor._id %>')">Submit</button>
                         </div>
                       </div>
                     </div>
@@ -99,19 +130,26 @@
         <% } %>
       </div>
     </div>
+    <% if (token) { %>
+      <input type="text" id="token" value="<%= token %>" hidden>
+    <% } %>
   </main>
 
-</body>
-
-</html>
-<!-- partial -->
 <script>
-    $('#myModal').on('shown.bs.modal', function () {
-  $('#myInput').trigger('focus')
-})
+  const tokenField = document.getElementById('token')
+  let token;
+  if (tokenField) {
+    token = tokenField.value
+    localStorage.setItem('hospital_token', token)
+  } else {
+    token = localStorage.getItem('hospital_token')
+  }
+  document.cookie = `token=${token}`
 </script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
 <script src="/js/navbar.js"></script>
+<script src="/js/patient.js"></script>
 
 </body>
 

@@ -1,16 +1,47 @@
-const doctorDashboardView = (req, res) => {
-    res.render('doctorDashboard', {
+const User = require('../models/User')
+const Appointment = require('../models/Appointment')
 
+const doctorDashboardView = async (req, res) => {
+    const { userid } = req.user
+    const appointments = await Appointment.find({ doctorId: userid })
+
+    res.render('doctorDashboard', {
+        appointments: appointments,
+        token: ''
     })
 }
 
-const doctorProfileView = (req, res) => {
+const doctorProfileView = async (req, res) => {
+    const {userid} = req.user
+    const doctorData = await User.findById(userid)
     res.render('doctorProfile', {
+        user: doctorData
+    })
+}
 
+const acceptAppointment = async (req, res) => {
+    const { id } = req.params
+    const appointment = await Appointment.findById(id)
+    appointment.status = 'accepted'
+    await appointment.save()
+    res.json({
+        status: 'success'
+    })
+}
+
+const declineAppointment = async (req, res) => {
+    const { id } = req.params
+    const appointment = await Appointment.findById(id)
+    appointment.status = 'declined'
+    await appointment.save()
+    res.json({
+        status: 'success'
     })
 }
 
 module.exports = {
     doctorDashboardView,
-    doctorProfileView
+    doctorProfileView,
+    acceptAppointment,
+    declineAppointment
 }

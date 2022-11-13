@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
     integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   <link rel="stylesheet" href="/css/navbar.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
 
@@ -35,132 +38,73 @@
   </header>
   <main>
     <div class="p-4">
-      <h2 style="margin-top: 50px;">Patients Management</h2>
+      <h2 style="margin-top: 50px;">My Appointments</h2>
       <div class="d-flex flex-column mt-4">
         <div class="p-3 mt-2"
           style="width: 100%; min-width: 600px; border-radius: 8px; background-color: #79ccc2; color: white; font-size: 16px; font-weight: 500;">
           <div class="row">
             <div class="col-3" style="box-sizing: border-box;">Patient Name</div>
-            <div class="col-2">Gender</div>
-            <div class="col-2">Disease</div>
-            <div class="col-2">Phone</div>
+            <div class="col-3">Suggest Time</div>
+            <div class="col-3">Phone</div>
             <div class="col-3">Action</div>
           </div>
         </div>
-        <div class="p-3 mt-2"
+        <% if (appointments.length === 0) { %>
+          <div class="p-3 mt-2 d-flex w-100 justify-content-center">No appointments yet</div>  
+        <% } else { %>
+        <% appointments.forEach(function(appointment) { %>
+          <div class="p-3 mt-2"
           style="width: 100%; min-width: 600px; border-radius: 8px; background-color: rgb(64 66 65); color: white;">
           <div class="row">
             <div class="col-3 d-flex align-items-center">
               <div class="mr-2" style="border-radius: 50%; width: 40px; height: 40px; overflow: hidden;">
-                <img src="/avatar/female.png" style="width: 100%; height: 100%;">
+                <img src="/avatar/<%= appointment.patientAvatar %>" style="width: 100%; height: 100%;">
               </div>
-              <a href="#" style="text-decoration: underline;">Lisa</a>
+              <a href="#" style="text-decoration: underline;"><%= appointment.patientName %></a>
             </div>
-            <div class="col-2 d-flex align-items-center">
-              female
+            <div id="appointment_date" class="col-3 d-flex align-items-center">
             </div>
-            <div class="col-2 d-flex align-items-center">
-              cold
-            </div>
-            <div class="col-2 d-flex align-items-center">
-              1111111
+            <input type="text" id="date_temp" value="<%= appointment.dateTime %>" hidden>
+            <div class="col-3 d-flex align-items-center">
+              <%= appointment.patientPhone %>
             </div>
             <div class="col-3 d-flex align-items-center">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-sm btn-success">Accept</button>
-                <button type="button" class="btn btn-sm btn-danger">Decline</button>
-              </div>
+                <% if (appointment.status === 'pending') { %>
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-sm btn-success" onclick="acceptOrder('<%= appointment._id %>')">Accept</button>
+                    <button type="button" class="btn btn-sm btn-danger" onclick="declineOrder('<%= appointment._id %>')">Decline</button>
+                  </div>
+                <% } else if (appointment.status === 'accepted') { %>
+                  <button type="button" class="btn btn-sm btn-danger" onclick="declineOrder('<%= appointment._id %>')">Decline</button>
+                <% } else { %>
+                  <button type="button" class="btn btn-sm btn-success" onclick="acceptOrder('<%= appointment._id %>')">Accept</button>
+                <% } %>
             </div>
           </div>
         </div>
-        <div class="p-3 mt-2"
-          style="width: 100%; min-width: 600px; border-radius: 8px; background-color: rgb(64 66 65); color: white;">
-          <div class="row">
-            <div class="col-3 d-flex align-items-center">
-              <div class="mr-2" style="border-radius: 50%; width: 40px; height: 40px; overflow: hidden;">
-                <img src="/avatar/female.png" style="width: 100%; height: 100%;">
-              </div>
-              <a href="#" style="text-decoration: underline;">Lisa</a>
-            </div>
-            <div class="col-2 d-flex align-items-center">
-              female
-            </div>
-            <div class="col-2 d-flex align-items-center">
-              cold
-            </div>
-            <div class="col-2 d-flex align-items-center">
-              1111111
-            </div>
-            <div class="col-3 d-flex align-items-center">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-sm btn-success">Accept</button>
-                <button type="button" class="btn btn-sm btn-danger">Decline</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="p-3 mt-2"
-          style="width: 100%; min-width: 600px; border-radius: 8px; background-color: rgb(64 66 65); color: white;">
-          <div class="row">
-            <div class="col-3 d-flex align-items-center">
-              <div class="mr-2" style="border-radius: 50%; width: 40px; height: 40px; overflow: hidden;">
-                <img src="/avatar/female.png" style="width: 100%; height: 100%;">
-              </div>
-              <a href="#" style="text-decoration: underline;">Lisa</a>
-            </div>
-            <div class="col-2 d-flex align-items-center">
-              female
-            </div>
-            <div class="col-2 d-flex align-items-center">
-              cold
-            </div>
-            <div class="col-2 d-flex align-items-center">
-              1111111
-            </div>
-            <div class="col-3 d-flex align-items-center">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-sm btn-success">Accept</button>
-                <button type="button" class="btn btn-sm btn-danger">Decline</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="p-3 mt-2"
-          style="width: 100%; min-width: 600px; border-radius: 8px; background-color: rgb(64 66 65); color: white;">
-          <div class="row">
-            <div class="col-3 d-flex align-items-center">
-              <div class="mr-2" style="border-radius: 50%; width: 40px; height: 40px; overflow: hidden;">
-                <img src="/avatar/female.png" style="width: 100%; height: 100%;">
-              </div>
-              <a href="#" style="text-decoration: underline;">Lisa</a>
-            </div>
-            <div class="col-2 d-flex align-items-center">
-              female
-            </div>
-            <div class="col-2 d-flex align-items-center">
-              cold
-            </div>
-            <div class="col-2 d-flex align-items-center">
-              1111111
-            </div>
-            <div class="col-3 d-flex align-items-center">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-sm btn-success">Accept</button>
-                <button type="button" class="btn btn-sm btn-danger">Decline</button>
-              </div>
-            </div>
-          </div>
-        </div>
+          <% })  %>
+        <% } %>
       </div>
     </div>
+    <% if (token) { %>
+      <input type="text" id="token" value="<%= token %>" hidden>
+    <% } %>
   </main>
-
-</body>
-
-</html>
-<!-- partial -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
-<script src="/js/navbar.js"></script>
+  <script>
+    const tokenField = document.getElementById('token')
+    let token;
+    if (tokenField) {
+      token = tokenField.value
+      localStorage.setItem('hospital_token', token)
+    } else {
+      token = localStorage.getItem('hospital_token')
+    }
+    document.cookie = `token=${token}`
+  </script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+  <script src="/js/navbar.js"></script>
+  <script src="/js/doctor.js"></script>
 
 </body>
 

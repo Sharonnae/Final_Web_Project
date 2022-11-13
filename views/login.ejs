@@ -77,12 +77,17 @@
           </div>
       </div>
     </div>
+    <% if (status === 'logout') { %>
+      <input type="text" id="logout" value="<%= status %>" hidden>
+    <% } %>
   </main>
-
-</body>
-
-</html>
-<!-- partial -->
+<script>
+  const logoutField = document.getElementById('logout')
+  if (logoutField) {
+    document.cookie = "token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+    window.location.href = '/login'
+  }
+</script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script><script  src="/js/navbar.js"></script>
 
 </body>

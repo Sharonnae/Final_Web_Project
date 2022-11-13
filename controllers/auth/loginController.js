@@ -1,11 +1,11 @@
 const User = require('../../models/User')
+const Appointment = require('../../models/Appointment')
 const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
 
 const loginView = (req, res) => {
     res.render('login', {
-        email: '',
-        password: ''
+        status: ''
     })
 }
 
@@ -34,9 +34,11 @@ const loginUser = async (req, res) => {
                         token: token
                     })
                 } else if (user.role === 'doctor') {
+                    const appointments = await Appointment.find({ doctorId: user._id })
                     res.render('doctorDashboard', {
                         status: 'success',
-                        token: token
+                        token: token,
+                        appointments: appointments
                     })
                 } else if (user.role === 'patient') {
                     const doctors = await User.find({ role: 'doctor' })

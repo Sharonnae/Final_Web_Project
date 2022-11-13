@@ -11,7 +11,9 @@
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
         integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/doctor.css">
 
@@ -47,18 +49,18 @@
                     <input id="three" name="tabs" type="radio">
                     <label for="three"><i class="fas fa-info-circle"></i> Info</label>
                     <input id="four" name="tabs" type="radio">
-                    <label for="four"><i class="fas fa-signal"></i> Status</label>
+                    <label for="four"><i class="fas fa-calendar-check"></i> Appointments</label>
                     <div class="panels">
                         <div class="panel">
                             <div class="d-flex justify-content-start align-items-center">
-                                <div class="profile_image_box">
-                                    <input type="file" hidden>
-                                    <img src="/avatar/female.png">
+                                <div class="profile_image_box" id="custom_upload">
+                                    <input type="file" id="file_input" hidden>
+                                    <img src="/avatar/<%= user.avatar %>" id="img">
                                 </div>
                                 <div class="d-flex flex-column align-items ml-4">
                                     <div class="d-flex justify-content-start mb-4">
-                                        <button class="btn btn-success mr-4">UPLOAD NEW PHOTO</button>
-                                        <button class="btn btn-secondary">RESET</button>
+                                        <button class="btn btn-success mr-4" onclick="uploadAvatar()">UPLOAD NEW PHOTO</button>
+                                        <button class="btn btn-secondary" onclick="resetAvatar('<%= user.avatar %>')">RESET</button>
                                     </div>
                                     <div style="font-size: 12px; color: gray;">
                                         Allowed PNG or JPEG. Max size of 800K.
@@ -66,14 +68,12 @@
                                 </div>
                             </div>
                             <div class="d-flex flex-column mt-4">
-                                <input type="text" class="form-control mb-4" id="inputPassword" placeholder="name">
-                                <input type="email" class="form-control mb-4" id="inputPassword" placeholder="email">
-                                <input type="text" class="form-control mb-4" id="inputPassword" placeholder="role">
-                            </div>
-
-                            <div class="d-flex justify-content-start">
-                                <button class="btn btn-success mr-4">SAVE CHANGES</button>
-                                <button class="btn btn-secondary">RESET</button>
+                                <label class="form-label">Name:</label>
+                                <input type="text" class="form-control mb-2" value="<%= user.fullname %>" placeholder="name" disabled>
+                                <label class="form-label">Email:</label>
+                                <input type="email" class="form-control mb-2" value="<%= user.email %>" placeholder="email" disabled>
+                                <label class="form-label">Role:</label>
+                                <input type="text" class="form-control mb-2" value="<%= user.role %>" placeholder="role" disabled>
                             </div>
                         </div>
                         <div class="panel">
@@ -81,46 +81,46 @@
                                 <div class="form-group d-flex flex-column">
                                     <label class="control-label">Current Password</label>
                                     <div>
-                                        <input id="password-field" type="password" class="form-control"
-                                            placeholder="Current Password" name="password">
-                                        <span toggle="#password-field"
-                                            class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                        <input id="currentPwd" type="password" class="form-control"
+                                            placeholder="Current Password">
                                     </div>
                                 </div>
                                 <div class="form-group d-flex flex-column">
                                     <label class="control-label">New Password</label>
                                     <div>
-                                        <input id="password-field" type="password" class="form-control"
-                                            placeholder="New Password" name="password">
-                                        <span toggle="#password-field"
-                                            class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                        <input id="newPwd" type="password" class="form-control"
+                                            placeholder="New Password">
                                     </div>
                                 </div>
                                 <div class="form-group d-flex flex-column">
                                     <label class="control-label">Confirm Password</label>
                                     <div>
-                                        <input id="password-field" type="password" class="form-control"
-                                            placeholder="Confirm Password" name="password">
-                                        <span toggle="#password-field"
-                                            class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                        <input id="confirmPwd" type="password" class="form-control"
+                                            placeholder="Confirm Password">
                                     </div>
                                 </div>
 
                                 <div class="d-flex justify-content-start">
-                                    <button class="btn btn-success mr-4">SAVE CHANGES</button>
-                                    <button class="btn btn-secondary">RESET</button>
+                                    <button class="btn btn-success mr-4" onclick="changePassword()">SAVE CHANGES</button>
+                                    <button class="btn btn-secondary" onclick="resetPassword()">RESET</button>
                                 </div>
                             </div>
                         </div>
                         <div class="panel">
                             <div class="row">
                                 <div class="col-sm-8 d-flex flex-column">
-                                    <input type="number" class="form-control mb-4" id="inputPassword" placeholder="phone">
-                                    <input type="text" class="form-control mb-4" id="inputPassword" placeholder="gender">
-                                    <input type="text" class="form-control mb-4" id="inputPassword" placeholder="location">    
+                                <label class="form-label">Phone:</label>
+                                    <input type="number" id="phone" class="form-control mb-2" value="<%= user.phone %>" placeholder="phone">
+                                <label class="form-label">Gender:</label>
+                                <input type="text" class="form-control mb-2" value="<%= user.gender %>" placeholder="gender" disabled>
+                                <label class="form-label">Location:</label>
+                                <input type="text" name="location"  value="<%= user.location %>" class="form-control mb-2 places-autocomplete"
+                    id="format_address" required>
+                  <input type="text" id="user_lat" value="<%= user.latitude %>" name="latitude" hidden>
+                  <input type="text" id="user_lng" value="<%= user.longitude %>" name="longitude" hidden>
                                     <div class="d-flex justify-content-start mt-4">
-                                        <button class="btn btn-success mr-4">SAVE CHANGES</button>
-                                        <button class="btn btn-secondary">RESET</button>
+                                        <button class="btn btn-success mr-4" onclick="profileUpdate()">SAVE CHANGES</button>
+                                        <button class="btn btn-secondary" onclick="resetProfile('<%= user.phone %>', '<%= user.location %>', '<%= user.latitude %>', '<%= user.longitude %>')">RESET</button>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -137,104 +137,41 @@
                                   style="width: 100%; min-width: 600px; border-radius: 8px; background-color: #79ccc2; color: white; font-size: 16px; font-weight: 500;">
                                   <div class="row">
                                     <div class="col-3" style="box-sizing: border-box;">Doctor Name</div>
-                                    <div class="col-2">Gender</div>
-                                    <div class="col-2">Disease</div>
-                                    <div class="col-3">Phone</div>
+                                    <div class="col-3">Suggest Time</div>
+                                    <div class="col-2">Location</div>
+                                    <div class="col-2">Phone</div>
                                     <div class="col-2">Status</div>
                                   </div>
                                 </div>
+                                <% if (appointments.length === 0) { %>
+                                  <div class="p-3 mt-2 d-flex w-100 justify-content-center">No appointments yet</div>  
+                                <% } else { %>
+                                <% appointments.forEach(function(appointment) { %>
                                 <div class="p-3 mt-2"
                                   style="width: 100%; min-width: 600px; border-radius: 8px; background-color: rgb(64 66 65); color: white;">
                                   <div class="row">
                                     <div class="col-3 d-flex align-items-center">
                                       <div class="mr-2" style="border-radius: 50%; width: 40px; height: 40px; overflow: hidden;">
-                                        <img src="/avatar/female.png" style="width: 100%; height: 100%;">
+                                        <img src="/avatar/<%= appointment.doctorAvatar %>" style="width: 100%; height: 100%;">
                                       </div>
-                                      <a href="#" style="text-decoration: underline;">Lisa</a>
+                                      <a href="#" style="text-decoration: underline;"><%= appointment.doctorName %></a>
+                                    </div>
+                                    <div id="appointment_date" class="col-3 d-flex align-items-center">
+                                    </div>
+                                    <input type="text" id="date_temp" value="<%= appointment.dateTime %>" hidden>
+                                    <div class="col-2 d-flex align-items-center">
+                                      <%= appointment.doctorLocation %>
                                     </div>
                                     <div class="col-2 d-flex align-items-center">
-                                      female
+                                      <%= appointment.doctorPhone %>
                                     </div>
                                     <div class="col-2 d-flex align-items-center">
-                                      Paris
-                                    </div>
-                                    <div class="col-3 d-flex align-items-center">
-                                      1111111
-                                    </div>
-                                    <div class="col-2 d-flex align-items-center">
-                                        Accepted
+                                        <%= appointment.status %>
                                       </div>
                                   </div>
                                 </div>
-                                <div class="p-3 mt-2"
-                                style="width: 100%; min-width: 600px; border-radius: 8px; background-color: rgb(64 66 65); color: white;">
-                                <div class="row">
-                                  <div class="col-3 d-flex align-items-center">
-                                    <div class="mr-2" style="border-radius: 50%; width: 40px; height: 40px; overflow: hidden;">
-                                      <img src="/avatar/female.png" style="width: 100%; height: 100%;">
-                                    </div>
-                                    <a href="#" style="text-decoration: underline;">Lisa</a>
-                                  </div>
-                                  <div class="col-2 d-flex align-items-center">
-                                    female
-                                  </div>
-                                  <div class="col-2 d-flex align-items-center">
-                                    Paris
-                                  </div>
-                                  <div class="col-3 d-flex align-items-center">
-                                    1111111
-                                  </div>
-                                  <div class="col-2 d-flex align-items-center">
-                                      Accepted
-                                    </div>
-                                </div>
-                              </div>
-                              <div class="p-3 mt-2"
-                              style="width: 100%; min-width: 600px; border-radius: 8px; background-color: rgb(64 66 65); color: white;">
-                              <div class="row">
-                                <div class="col-3 d-flex align-items-center">
-                                  <div class="mr-2" style="border-radius: 50%; width: 40px; height: 40px; overflow: hidden;">
-                                    <img src="/avatar/female.png" style="width: 100%; height: 100%;">
-                                  </div>
-                                  <a href="#" style="text-decoration: underline;">Lisa</a>
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                  female
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                  Paris
-                                </div>
-                                <div class="col-3 d-flex align-items-center">
-                                  1111111
-                                </div>
-                                <div class="col-2 d-flex align-items-center">
-                                    Accepted
-                                  </div>
-                              </div>
-                            </div>
-                            <div class="p-3 mt-2"
-                            style="width: 100%; min-width: 600px; border-radius: 8px; background-color: rgb(64 66 65); color: white;">
-                            <div class="row">
-                              <div class="col-3 d-flex align-items-center">
-                                <div class="mr-2" style="border-radius: 50%; width: 40px; height: 40px; overflow: hidden;">
-                                  <img src="/avatar/female.png" style="width: 100%; height: 100%;">
-                                </div>
-                                <a href="#" style="text-decoration: underline;">Lisa</a>
-                              </div>
-                              <div class="col-2 d-flex align-items-center">
-                                female
-                              </div>
-                              <div class="col-2 d-flex align-items-center">
-                                Paris
-                              </div>
-                              <div class="col-3 d-flex align-items-center">
-                                1111111
-                              </div>
-                              <div class="col-2 d-flex align-items-center">
-                                  Accepted
-                                </div>
-                            </div>
-                          </div>
+                                <% }) %>
+                                <% } %>
                               </div>
                         </div>
                     </div>
@@ -242,13 +179,18 @@
             </div>
         </div>
     </main>
-    <script src="/js/doctor.js"></script>
+    <div id="successSnackbar">Changed password successfully</div>
+    <div id="errorSnackbar">Wrong password</div>
+    <script src="/js/profile.js"></script>
     <script src="/js/navbar.js"></script>
+    <script src="/js/patient.js"></script>
 
     <script>
         function Map123() {
+            const latitude = document.getElementById('user_lat').value
+            const longitude = document.getElementById('user_lng').value
             let mapOptions = {
-                center: new google.maps.LatLng(51.508742, -0.120850),
+                center: new google.maps.LatLng(latitude, longitude),
                 zoom: 5,
                 mapTypeId: google.maps.MapTypeId.HYBRID
             }
@@ -257,11 +199,13 @@
                 position: map.getCenter(),
                 map: map
             })
-        }  
+        }
     </script>
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5-mJU8x096rUj4O9xWNv8MLXTJEHiOWc&callback=Map123"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5-mJU8x096rUj4O9xWNv8MLXTJEHiOWc&libraries=places&callback=Map123"></script>
+    <script src="/js/autocomplete.js"></script>
 
 </body>
 

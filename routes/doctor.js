@@ -1,13 +1,19 @@
 const express = require('express')
 const {
     doctorDashboardView,
-    doctorProfileView
+    doctorProfileView,
+    acceptAppointment,
+    declineAppointment
 } = require('../controllers/doctorController')
+const auth = require('../middleware/auth')
 
 const router = express.Router()
 
-router.get('/', doctorDashboardView)
+router.get('/', auth, doctorDashboardView)
 
-router.get('/profile', doctorProfileView)
+router.get('/profile', auth, doctorProfileView)
+
+router.get('/acceptOrder/:id', auth, acceptAppointment)
+router.get('/declineOrder/:id', auth, declineAppointment)
 
 module.exports = router

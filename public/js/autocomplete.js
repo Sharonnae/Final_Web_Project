@@ -1,15 +1,11 @@
 var GoogleMapsDemo = GoogleMapsDemo || {};
 
 GoogleMapsDemo.Utilities = (function () {
-    var _getUserLocation = function (successCallback, failureCallback) {
+    var _getUserLocation = function (successCallback) {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
                 successCallback(position);
-            }, function () {
-                failureCallback(true);
             });
-         } else {
-             failureCallback(false);
          }
     };
     
@@ -27,11 +23,10 @@ GoogleMapsDemo.Application = (function () {
     
     var _initAutocompletes = function () {
         $('.places-autocomplete').each(function () {
-            var input = this;
+        var input = this;
             var autocomplete = new google.maps.places.Autocomplete(input, {
                 types: 'address'
             });
-            
             autocomplete.addListener('place_changed', function () {
                 _placeChanged(autocomplete);
             });
