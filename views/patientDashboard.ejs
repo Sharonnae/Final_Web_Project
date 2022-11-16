@@ -40,116 +40,108 @@
     <div class="p-4">
       <div class="d-flex justify-content-between" style="margin-top: 70px;">
         <h2>Doctor Lists</h2>
-        <button class="btn btn-primary d-flex justify-content-around align-items-center" data-toggle="modal" data-target="#filterList" style="width: 100px;">
-          <i class="fas fa-filter"></i> Filter
-        </button>
-        <div class="modal fade" id="filterList" tabindex="-1" role="dialog" aria-labelledby="filterList" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content" style="background-color: #79ccc2;">
-              <div class="modal-body">
-                <h5 style="color: white; font-weight: bold;">Filter Options</h5>
-                  <input type="text" class="form-control mt-4 mb-2" placeholder="Search...">
-                  <label class="form-control-label" style="color: white;">Sort by expertise</label>
-                  <select class="form-control mb-2">
-                    <option>Choose order type</option>
-                    <option>ASC</option>
-                    <option>DESC</option>
-                  </select>
-                  <label class="form-control-label" style="color: white;">Sort by location</label>
-                  <select class="form-control mb-2">
-                    <option>Choose order type</option>
-                    <option>ASC</option>
-                    <option>DESC</option>
-                  </select>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Submit</button>
-              </div>
-            </div>
-          </div>
+        <div>
+          <input type="text" class="form-control" placeholder="Search...">
         </div>
-      </div> 
+      </div>
       <div class="d-flex flex-column mt-2">
         <div class="p-3 mt-2"
           style="width: 100%; min-width: 600px; border-radius: 8px; background-color: #79ccc2; color: white; font-size: 16px; font-weight: 500;">
           <div class="row">
             <div class="col-3" style="box-sizing: border-box;">Doctor Name</div>
-            <div class="col-2">Expertise</div>
-            <div class="col-3">Location</div>
+            <div class="col-2">
+              <button style="color: white; padding: 0 !important;" onclick="sortData('expertise')">
+                Expertise
+                <i id="expertiseSort" class="fas fa-sort"></i>
+              </button>
+            </div>
+            <div class="col-3">
+              <button style="color: white; padding: 0 !important;" onclick="sortData('location')">
+                Location
+                <i id="locationSort" class="fas fa-sort"></i>
+              </button>
+            </div>
             <div class="col-2">Phone</div>
             <div class="col-2">Appointment</div>
           </div>
         </div>
-        <% if (doctors.length === 0) { %>
-          <div class="p-3 mt-2 d-flex w-100 justify-content-center">No doctors yet</div>  
-        <% } else { %>
-        <% doctors.forEach(function(doctor) { %>
-          <div class="p-3 mt-2"
-          style="width: 100%; min-width: 600px; border-radius: 8px; background-color: rgb(64 66 65); color: white;">
-          <div class="row">
-            <div class="col-3 d-flex align-items-center">
-              <div class="mr-2" style="border-radius: 50%; width: 40px; height: 40px; overflow: hidden;">
-                <img src="/avatar/<%= doctor.avatar %>" style="width: 100%; height: 100%;">
-              </div>
-              <a href="#" style="text-decoration: underline;"><%= doctor.fullname %></a>
-            </div>
-            <div class="col-2 d-flex align-items-center">
-              <%= doctor.expertise %>
-            </div>
-            <div class="col-3 d-flex align-items-center">
-              <%= doctor.location %>
-            </div>
-            <div class="col-2 d-flex align-items-center">
-              <%= doctor.phone %>
-            </div>
-            <div class="col-2 d-flex align-items-center">
-                <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#disease<%= doctor._id %>">
-                    Suggest
-                  </button>
-                  
-                  <!-- Modal -->
-                  <div class="modal fade" id="disease<%= doctor._id %>" tabindex="-1" role="dialog" aria-labelledby="disease<%= doctor._id %>" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content" style="background-color: #79ccc2;">
-                        <div class="modal-body">
-                            <label class="form-control-label">Please input available time</label>
-                          <input type="datetime-local" id="appointment<%= doctor._id %>" class="form-control">
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="setAppointment('<%= doctor._id %>')">Submit</button>
+        <div id="listPart">
+          <% if (doctors.length===0) { %>
+            <div class="p-3 mt-2 d-flex w-100 justify-content-center">No doctors yet</div>
+            <% } else { %>
+              <% doctors.forEach(function(doctor) { %>
+                <div class="p-3 mt-2"
+                  style="width: 100%; min-width: 600px; border-radius: 8px; background-color: rgb(64 66 65); color: white;">
+                  <div class="row">
+                    <div class="col-3 d-flex align-items-center">
+                      <div class="mr-2" style="border-radius: 50%; width: 40px; height: 40px; overflow: hidden;">
+                        <img src="/avatar/<%= doctor.avatar %>" style="width: 100%; height: 100%;">
+                      </div>
+                      <a href="#" style="text-decoration: underline;">
+                        <%= doctor.fullname %>
+                      </a>
+                    </div>
+                    <div class="col-2 d-flex align-items-center">
+                      <%= doctor.expertise %>
+                    </div>
+                    <div class="col-3 d-flex align-items-center">
+                      <%= doctor.location %>
+                    </div>
+                    <div class="col-2 d-flex align-items-center">
+                      <%= doctor.phone %>
+                    </div>
+                    <div class="col-2 d-flex align-items-center">
+                      <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
+                        data-target="#disease<%= doctor._id %>">
+                        Suggest
+                      </button>
+
+                      <!-- Modal -->
+                      <div class="modal fade" id="disease<%= doctor._id %>" tabindex="-1" role="dialog"
+                        aria-labelledby="disease<%= doctor._id %>" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content" style="background-color: #79ccc2;">
+                            <div class="modal-body">
+                              <label class="form-control-label">Please input available time</label>
+                              <input type="datetime-local" id="appointment<%= doctor._id %>" class="form-control">
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-success btn-sm" data-dismiss="modal"
+                                onclick="setAppointment('<%= doctor._id %>')">Submit</button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-              </div>
-          </div>
+                </div>
+                <% }) %>
+                  <% } %>
         </div>
-        <% }) %>
-        <% } %>
+
       </div>
     </div>
     <% if (token) { %>
       <input type="text" id="token" value="<%= token %>" hidden>
-    <% } %>
+      <% } %>
   </main>
 
-<script>
-  const tokenField = document.getElementById('token')
-  let token;
-  if (tokenField) {
-    token = tokenField.value
-    localStorage.setItem('hospital_token', token)
-  } else {
-    token = localStorage.getItem('hospital_token')
-  }
-  document.cookie = `token=${token}`
-</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
-<script src="/js/navbar.js"></script>
-<script src="/js/patient.js"></script>
+  <script>
+    const tokenField = document.getElementById('token')
+    let token;
+    if (tokenField) {
+      token = tokenField.value
+      localStorage.setItem('hospital_token', token)
+    } else {
+      token = localStorage.getItem('hospital_token')
+    }
+    document.cookie = `token=${token}`
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+  <script src="/js/navbar.js"></script>
+  <script src="/js/patient.js"></script>
 
 </body>
 
