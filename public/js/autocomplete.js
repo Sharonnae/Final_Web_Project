@@ -23,7 +23,7 @@ GoogleMapsDemo.Application = (function () {
     
     var _initAutocompletes = function () {
         $('.places-autocomplete').each(function () {
-        var input = this;
+            var input = this;
             var autocomplete = new google.maps.places.Autocomplete(input, {
                 types: 'address'
             });
@@ -42,12 +42,12 @@ GoogleMapsDemo.Application = (function () {
     
     var _placeChanged = function (autocomplete) {
         var place = autocomplete.getPlace();
-        console.log('dfd', place)
         _updateAddress({
             address_components: place.formatted_address,
             lat: place.geometry.location.lat(),
             lng: place.geometry.location.lng()
         });
+        console.log(place.geometry.location.lat(), place.geometry.location.lng())
     }
     
     var _updateAddress = function (args) {

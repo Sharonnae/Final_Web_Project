@@ -44,6 +44,10 @@ const UserSchema = new mongoose.Schema({
   },
   expertise: {
     type: String
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
   }
 });
 

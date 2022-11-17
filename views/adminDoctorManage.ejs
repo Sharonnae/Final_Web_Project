@@ -15,6 +15,20 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    .form-group {
+      margin-bottom: 0px !important;
+    }
+
+    label {
+      font-size: 14px;
+      margin-bottom: 0px !important;
+    }
+
+    .pac-container {
+      z-index: 9999;
+    }
+  </style>
 
 </head>
 
@@ -46,48 +60,72 @@
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="addDoctor" tabindex="-1" role="dialog" aria-labelledby="addDoctor"
-          aria-hidden="true">
+        <div class="modal fade" id="addDoctor" role="dialog" aria-labelledby="addDoctor" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content" style="background-color: #79ccc2;">
-              <div class="modal-body">
-                <form id="signupForm" method="post" action="/signup">
+              <form id="doctorForm">
+                <div class="modal-body">
                   <div class="form-group">
-                    <label class="form-control-label">FULL NAME</label>
+                    <label class="form-control-label" style="color: white;">FULL NAME</label>
                     <input type="text" name="fullname" class="form-control" required>
                   </div>
                   <div class="form-group">
-                    <label class="form-control-label">EMAIL</label>
+                    <label class="form-control-label" style="color: white;">EMAIL</label>
                     <input type="email" name="email" class="form-control" required>
                   </div>
                   <div class="form-group">
-                    <label class="form-control-label">PASSWORD</label>
+                    <label class="form-control-label" style="color: white;">PASSWORD</label>
                     <input type="password" name="password" class="form-control" required>
                   </div>
                   <div class="form-group">
-                    <label class="form-control-label">LOCATION</label>
+                    <label class="form-control-label" style="color: white;">LOCATION</label>
                     <input type="text" placeholder="" name="location" class="form-control places-autocomplete"
                       id="format_address" required>
                     <input type="text" id="user_lat" name="latitude" hidden>
                     <input type="text" id="user_lng" name="longitude" hidden>
                   </div>
                   <div class="form-group">
-                    <label class="form-control-label">PHONE</label>
+                    <label class="form-control-label" style="color: white;">PHONE</label>
                     <input type="number" name="phone" class="form-control" required>
                   </div>
-                  <div class="form-group mb-4">
-                    <label class="form-control-label">GENDER</label>
+                  <div class="form-group">
+                    <label class="form-control-label" style="color: white;">GENDER</label>
                     <select name="gender" class="form-control">
                       <option value="male">Male</option>
                       <option value="female">Female</option>
                     </select>
                   </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Submit</button>
-              </div>
+                  <div class="form-group mb-4">
+                    <label class="form-control-label" style="color: white;">EXPERTISE</label>
+                    <select name="expertise" class="form-control">
+                      <option value="Family medicine">Family medicine</option>
+                      <option value="Internal Medicine">Internal Medicine</option>
+                      <option value="Pediatrician">Pediatrician</option>
+                      <option value="Obstetricians/gynecologist (OBGYNs)">Obstetricians/gynecologist (OBGYNs)</option>
+                      <option value="Cardiologist">Cardiologist</option>
+                      <option value="Oncologist">Oncologist</option>
+                      <option value="Gastroenterologist">Gastroenterologist</option>
+                      <option value="Pulmonologist">Pulmonologist</option>
+                      <option value="Infectious disease">Infectious disease</option>
+                      <option value="Nephrologist">Nephrologist</option>
+                      <option value="Endocrinologist">Endocrinologist</option>
+                      <option value="Ophthalmologist">Ophthalmologist</option>
+                      <option value="Otolaryngologist">Otolaryngologist</option>
+                      <option value="Dermatologist">Dermatologist</option>
+                      <option value="Psychiatrist">Psychiatrist</option>
+                      <option value="Neurologist">Neurologist</option>
+                      <option value="Radiologist">Radiologist</option>
+                      <option value="Anesthesiologist">Anesthesiologist</option>
+                      <option value="Surgeon">Surgeon</option>
+                      <option value="Physician executive">Physician executive</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-success btn-sm">Submit</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -97,57 +135,171 @@
           style="width: 100%; min-width: 600px; border-radius: 8px; background-color: #79ccc2; color: white; font-size: 16px; font-weight: 500;">
           <div class="row">
             <div class="col-3" style="box-sizing: border-box;">Doctor Name</div>
-            <div class="col-2">Gender</div>
+            <div class="col-2">Expertise</div>
             <div class="col-3">Location</div>
             <div class="col-2">Phone</div>
             <div class="col-2">Action</div>
           </div>
         </div>
-        <div class="p-3 mt-2"
-          style="width: 100%; min-width: 600px; border-radius: 8px; background-color: rgb(64 66 65); color: white;">
-          <div class="row">
-            <div class="col-3 d-flex align-items-center">
-              <div class="mr-2" style="border-radius: 50%; width: 40px; height: 40px; overflow: hidden;">
-                <img src="/avatar/female.png" style="width: 100%; height: 100%;">
-              </div>
-              <a href="#" style="text-decoration: underline;">Lisa</a>
-            </div>
-            <div class="col-2 d-flex align-items-center">
-              female
-            </div>
-            <div class="col-3 d-flex align-items-center">
-              Paris
-            </div>
-            <div class="col-2 d-flex align-items-center">
-              1111111
-            </div>
-            <div class="col-2 d-flex align-items-center">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#exampleModal1">
-                  Edit
-                </button>
-                <button type="button" class="btn btn-sm btn-danger">Delete</button>
-              </div>
-
-              <!-- Modal -->
-              <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel1" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content" style="background-color: #79ccc2;">
-                    <div class="modal-body">
-                      <label class="form-control-label">Please input your disease</label>
-                      <input type="text" class="form-control">
+        <% if (doctors.length===0) { %>
+          <div class="p-3 mt-2 d-flex w-100 justify-content-center">No doctors yet</div>
+          <% } else { %>
+            <% doctors.forEach(function(doctor) { %>
+              <div class="p-3 mt-2"
+                style="width: 100%; min-width: 600px; border-radius: 8px; background-color: rgb(64 66 65); color: white;">
+                <div class="row">
+                  <div class="col-3 d-flex align-items-center">
+                    <div class="mr-2" style="border-radius: 50%; width: 40px; height: 40px; overflow: hidden;">
+                      <img src="/avatar/<%= doctor.avatar %>" style="width: 100%; height: 100%;">
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-success btn-sm">Submit</button>
+                    <a href="#" style="text-decoration: underline;">
+                      <%= doctor.fullname%>
+                    </a>
+                  </div>
+                  <div class="col-2 d-flex align-items-center">
+                    <%= doctor.expertise %>
+                  </div>
+                  <div class="col-3 d-flex align-items-center">
+                    <%= doctor.location %>
+                  </div>
+                  <div class="col-2 d-flex align-items-center">
+                    <%= doctor.phone %>
+                  </div>
+                  <div class="col-2 d-flex align-items-center">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                      <button type="button" class="btn btn-sm btn-success" data-toggle="modal"
+                        data-target="#editDoctor<%= doctor._id %>">
+                        Edit
+                      </button>
+                      <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
+                      data-target="#deleteDoctor<%= doctor._id %>">
+                      Delete
+                    </button>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="editDoctor<%= doctor._id %>" tabindex="-1" role="dialog"
+                      aria-labelledby="editDoctor<%= doctor._id %>" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content" style="background-color: #79ccc2;">
+                          <form id="doctorUpdateForm">
+                            <div class="modal-body">
+                              <input type="text" name="id" class="form-control" value="<%= doctor._id %>" hidden>
+                              <div class="form-group">
+                                <label class="form-control-label" style="color: white;">FULL NAME</label>
+                                <input type="text" name="fullname" class="form-control" value="<%= doctor.fullname %>"
+                                  required>
+                              </div>
+                              <div class="form-group">
+                                <label class="form-control-label" style="color: white;">EMAIL</label>
+                                <input type="email" name="email" class="form-control" value="<%= doctor.email %>"
+                                  required>
+                              </div>
+                              <div class="form-group">
+                                <label class="form-control-label" style="color: white;">PASSWORD(OPTION)</label>
+                                <input type="password" name="password" class="form-control">
+                              </div>
+                              <div class="form-group">
+                                <label class="form-control-label" style="color: white;">LOCATION</label>
+                                <input type="text" placeholder="" name="location" value="<%= doctor.location %>"
+                                  class="form-control places-autocomplete" id="format_address" required>
+                                <input type="text" id="user_lat" value="<%= doctor.latitude %>" name="latitude"
+                                  hidden>
+                                <input type="text" id="user_lng" value="<%= doctor.longitude %>" name="longitude"
+                                  hidden>
+                              </div>
+                              <div class="form-group">
+                                <label class="form-control-label" style="color: white;">PHONE</label>
+                                <input type="number" name="phone" class="form-control" value="<%= doctor.phone %>"
+                                  required>
+                              </div>
+                              <div class="form-group">
+                                <label class="form-control-label" style="color: white;">GENDER</label>
+                                <select name="gender" class="form-control">
+                                  <% ['Male', 'Female' ].forEach((item)=> {
+                                    if (doctor.gender === item.toLowerCase()) { %>
+                                    <option value="<%= item.toLowerCase() %>" selected>
+                                      <%= item %>
+                                    </option>
+                                    <% } else { %>
+                                      <option value="<%= item.toLowerCase() %>">
+                                        <%= item %>
+                                      </option>
+                                      <% } %>
+                                        <% }) %>
+                                </select>
+                              </div>
+                              <div class="form-group mb-4">
+                                <label class="form-control-label" style="color: white;">EXPERTISE</label>
+                                <select name="expertise" class="form-control">
+                                  <% [ 'Family medicine' , 'Internal Medicine' , 'Pediatrician'
+                                    , 'Obstetricians/gynecologist (OBGYNs)' , 'Cardiologist' , 'Oncologist'
+                                    , 'Gastroenterologist' , 'Pulmonologist' , 'Infectious disease' , 'Nephrologist'
+                                    , 'Endocrinologist' , 'Ophthalmologist' , 'Otolaryngologist' , 'Dermatologist'
+                                    , 'Psychiatrist' , 'Neurologist' , 'Radiologist' , 'Anesthesiologist' , 'Surgeon'
+                                    , 'Physician executive' ].forEach((item)=> { %>
+                                    <% if (doctor.expertise===item) { %>
+                                      <option value="<%= item %>" selected>
+                                        <%= item %>
+                                      </option>
+                                      <% } else { %>
+                                        <option value="<%= item %>">
+                                          <%= item %>
+                                        </option>
+                                        <% } %>
+                                          <% }) %>
+                                            <option value="Family medicine">Family medicine</option>
+                                            <option value="Internal Medicine">Internal Medicine</option>
+                                            <option value="Pediatrician">Pediatrician</option>
+                                            <option value="Obstetricians/gynecologist (OBGYNs)">
+                                              Obstetricians/gynecologist (OBGYNs)</option>
+                                            <option value="Cardiologist">Cardiologist</option>
+                                            <option value="Oncologist">Oncologist</option>
+                                            <option value="Gastroenterologist">Gastroenterologist</option>
+                                            <option value="Pulmonologist">Pulmonologist</option>
+                                            <option value="Infectious disease">Infectious disease</option>
+                                            <option value="Nephrologist">Nephrologist</option>
+                                            <option value="Endocrinologist">Endocrinologist</option>
+                                            <option value="Ophthalmologist">Ophthalmologist</option>
+                                            <option value="Otolaryngologist">Otolaryngologist</option>
+                                            <option value="Dermatologist">Dermatologist</option>
+                                            <option value="Psychiatrist">Psychiatrist</option>
+                                            <option value="Neurologist">Neurologist</option>
+                                            <option value="Radiologist">Radiologist</option>
+                                            <option value="Anesthesiologist">Anesthesiologist</option>
+                                            <option value="Surgeon">Surgeon</option>
+                                            <option value="Physician executive">Physician executive</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-success btn-sm">Submit</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="modal fade" id="deleteDoctor<%= doctor._id %>" tabindex="-1" role="dialog"
+                      aria-labelledby="deleteDoctor<%= doctor._id %>" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content" style="background-color: #79ccc2;">
+                            <div class="modal-body" style="font-size: 20px;">
+                              Remove user?
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-success btn-sm" onclick="deleteUser('<%= doctor._id %>')">Delete</button>
+                            </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
+              <% }) %>
+                <% } %>
       </div>
     </div>
   </main>
@@ -155,10 +307,36 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5-mJU8x096rUj4O9xWNv8MLXTJEHiOWc&libraries=places"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
 
   <script src="/js/autocomplete.js"></script>
   <script src="/js/navbar.js"></script>
+  <script>
+    document.getElementById('doctorForm').addEventListener('submit', async (e) => {
+      e.preventDefault()
+      const formData = new FormData(e.target)
+
+      const res = await axios.post('/admin/doctor-manage/addDoctor', formData)
+      if (res.data.status === 'success') {
+        window.location.href = "/admin/doctor-manage"
+      }
+    })
+    document.getElementById('doctorUpdateForm').addEventListener('submit', async (e) => {
+      e.preventDefault()
+      const formData = new FormData(e.target)
+
+      const res = await axios.post('/admin/doctor-manage/updateDoctor', formData)
+      if (res.data.status === 'success') {
+        window.location.href = "/admin/doctor-manage"
+      }
+    })
+    async function deleteUser(id) {
+      const res = await axios.get(`/admin/deleteUser/${id}`)
+      if (res.data.status === 'success') {
+        window.location.href = "/admin/doctor-manage"
+      }
+    }
+  </script>
 
 </body>
 

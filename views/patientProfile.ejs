@@ -156,9 +156,9 @@
                                       </div>
                                       <a href="#" style="text-decoration: underline;"><%= appointment.doctorName %></a>
                                     </div>
-                                    <div id="appointment_date" class="col-3 d-flex align-items-center">
+                                    <div class="col-3 d-flex align-items-center">
+                                      <%= appointment.dateTime %>
                                     </div>
-                                    <input type="text" id="date_temp" value="<%= appointment.dateTime %>" hidden>
                                     <div class="col-2 d-flex align-items-center">
                                       <%= appointment.doctorLocation %>
                                     </div>
