@@ -9,10 +9,12 @@ const {
     addPatient,
     updatePatient,
     deleteUser,
+    useMedicalService
 } = require('../controllers/adminController')
 
 
 router.get('/', adminDashboardView)
+router.get('/useMedicalService', useMedicalService)
 router.get('/deleteUser/:id', deleteUser)
 router.get('/doctor-manage', adminDoctorManageView)
 router.get('/patient-manage', adminPatientManageView)

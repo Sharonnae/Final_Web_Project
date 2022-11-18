@@ -34,7 +34,7 @@ async function setAppointment(doctorId) {
     });
 
     if (res.data.status === "success") {
-      alert("Order is made successfully");
+      alert("Appointment requested successfully!");
     }
   }
 }

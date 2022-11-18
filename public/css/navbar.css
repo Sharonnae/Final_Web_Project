@@ -88,7 +88,7 @@ section {
   padding: 0 1em;
 }
 
-span.gradient {
+.nav span.gradient {
   background: #f857a8;
   background: -webkit-linear-gradient(45deg, #f857a8, #ff5858);
   background: linear-gradient(45deg, #f857a8, #ff5858);
@@ -97,25 +97,25 @@ span.gradient {
   right: 1em;
   margin-right: auto;
 }
-span.gradient:hover {
+.nav span.gradient:hover {
   animation-name: logo-hover;
   animation-duration: 0.3s;
   animation-fill-mode: forwards;
   animation-timing-function: cubic-bezier(0.17, 0.57, 0.31, 0.85);
 }
 
-h1 {
+.nav h1 {
   margin-top: 20px;
 }
 
-h1.logo {
+.nav h1.logo {
   font-weight: 300;
   font-size: 1.75em;
   line-height: 0.75em;
   color: #fff;
 }
 
-h1.logo a, a:active, a:hover, a:visited {
+.nav h1.logo a, .nav a:active, .nav a:hover, .nav a:visited {
   text-decoration: none;
   color: #fff;
 }
@@ -126,12 +126,12 @@ h1.logo a, a:active, a:hover, a:visited {
   border-top: 0.5px solid #ddd;
 }
 
-a:link, a:visited, a:active {
+.nav a:link, .nav a:visited, .nav a:active {
   text-decoration: none;
   color: #f857a8;
 }
 
-a:hover {
+.nav a:hover {
   text-decoration: underline;
 }
 
@@ -195,7 +195,7 @@ a:hover {
     padding-right: 3em;
   }
 
-  a:hover.nav-link:not(.active) {
+  .nav a:hover.nav-link:not(.active) {
     color: #444;
     background: #ddd;
     background: linear-gradient(45deg, #fff, #ddd);

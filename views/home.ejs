@@ -1,49 +1,193 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Hospital Management System</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" integrity="sha256-PF6MatZtiJ8/c9O9HQ8uSUXr++R9KBYu4gbNG5511WE=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"
+    integrity="sha256-PF6MatZtiJ8/c9O9HQ8uSUXr++R9KBYu4gbNG5511WE=" crossorigin="anonymous" />
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
 
-<link rel="stylesheet" href="/css/navbar.css">
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="stylesheet" href="/css/navbar.css">
 
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 
 <body>
-  <header id="nav-wrapper">
-    <nav id="nav">
-      <div class="nav left">
-        <span class="gradient skew"><h1 class="logo un-skew"><a href="/">HMS</a></h1></span>
-        <button id="menu" class="btn-nav"><span class="fas fa-bars"></span></button>
-      </div>
-      <div class="nav right">
-        <a href="/" class="nav-link active"><span class="nav-link-span"><span class="u-nav">Home</span></span></a>
-        <a href="/login" class="nav-link"><span class="nav-link-span"><span class="u-nav">Login</span></span></a>
-      </div>
-    </nav>
-  </header>
-  <main>
-    
-  </main>
+  <!-- partial:index.partial.html -->
+  <!DOCTYPE html>
+  <html lang="en">
 
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  </head>
+
+  <body onload="draw()">
+    <header id="nav-wrapper">
+      <nav id="nav">
+        <div class="nav left">
+          <span class="gradient skew">
+            <h1 class="logo un-skew"><a href="/">
+                HMS
+              </a></h1>
+          </span>
+          <button id="menu" class="btn-nav"><span class="fas fa-bars"></span></button>
+        </div>
+        <div class="nav right">
+          <a href="/" class="nav-link active"><span class="nav-link-span"><span class="u-nav">Home</span></span></a>
+          <a href="/login" class="nav-link"><span class="nav-link-span"><span class="u-nav">Login</span></span></a>
+          <a href="/signup" class="nav-link"><span class="nav-link-span"><span class="u-nav">Signup</span></span></a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="video_section" style="margin-top: 50px;">
+        <video autoplay muted loop id="myVideo">
+          <source src="/sample.mp4" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
+      <div class="section" style="display: flex; align-items: center; flex-direction: column;">
+        <canvas id="mycanvas" width="370" height="50"></canvas>
+        <p class="description" style="text-align: center;">
+          HMS is a web-based, fully integrated hospital management system (HMS) for mid- to large-sized hospitals and
+          clinics. HMS hospital software enables seamless end-to-end information flow, empowering hospitals with
+          critical insights needed to make effective decisions regarding patient care, administration, financial
+          accounting and more.
+        </p>
+      </div>
+      <div class="section" style="margin-bottom: 30px;">
+        <div class="row w-100">
+          <div class="col-lg-6 col-md-6 col-sm-12" style="display: flex; align-items: center; margin-top: 30px;">
+            <img src="/category1.png" style="background-color: #F80;">
+            <div class="d-flex flex-column" style="margin-left: 20px;">
+              <div class="category_title" style="font-size: 18px; font-weight: bold; color: #21B1C9">STREAMLINED OPERATIONS</div>
+              <div style="margin-top: 10px;">
+                Fully integrated clinical, support, finance and billing, supply chain and administrative functions for
+                more efficient operations.
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12" style="display: flex; align-items: center; margin-top: 30px;">
+            <img src="/category2.png" style="background-color: #C03E31;">
+              <div class="d-flex flex-column" style="margin-left: 20px;">
+                <div class="category_title" style="font-size: 18px; font-weight: bold; color: #21B1C9">ENHANCED PATIENT CARE</div>
+                <div style="margin-top: 10px;">
+                Structured, specialty-wise electronic medical records enabling doctors to provide diagnosis-based care with better visibility to patients.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row w-100">
+          <div class="col-lg-6 col-md-6 col-sm-12" style="display: flex; align-items: center; margin-top: 30px;">
+            <img src="/category3.png" style="background-color: #21B1C9;">
+              <div class="d-flex flex-column" style="margin-left: 20px;">
+                <div class="category_title" style="font-size: 18px; font-weight: bold; color: #21B1C9">INTEROPERABILITY ACROSS STANDARDS</div>
+                <div style="margin-top: 10px;">
+                Compliance with standards like ICD 9/10, CPT 4, HL 7 and DICOM.
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12" style="display: flex; align-items: center; margin-top: 30px;">
+            <img src="/category4.png" style="background-color: #40717B;">
+              <div class="d-flex flex-column" style="margin-left: 20px;">
+                <div class="category_title" style="font-size: 18px; font-weight: bold; color: #21B1C9">INFORMATION SECURITY</div>
+              <div style="margin-top: 10px;">
+                Role-based security matrix to define user controls in each department.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <h6>About</h6>
+            <p class="text-justify">On an everyday basis, Medinous enables the front office staff to help patients by
+              simplifying the registration, payment and insurance workflows resulting in excellent patient experience
+              and less stress for staff on duty. We are more productive and proficient now than ever before. -
+              Operations Manager
+            </p>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Products</h6>
+            <ul class="footer-links">
+              <li><a href="#">
+                  Medinous Spectrum
+                </a></li>
+              <li><a href="#">
+                  Medinous Fusion
+                </a></li>
+              <li><a href="#">
+                  Medinous CliniX
+                </a></li>
+            </ul>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Quick Links</h6>
+            <ul class="footer-links">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Contribute</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Sitemap</a></li>
+            </ul>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Copyright &copy; 2022 All Rights Reserved by
+              <a href="#">HMS</a>.
+            </p>
+          </div>
+
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="social-icons">
+              <li><a class="facebook" href="#"><i class="fab fa-facebook"></i></a></li>
+              <li><a class="twitter" href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a class="dribbble" href="#"><i class="fab fa-dribbble"></i></a></li>
+              <li><a class="linkedin" href="#"><i class="fab fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+
+  </html>
+  <!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/logo.js"></script>
+  <script>
+    var video = document.getElementById("myVideo");
+    var btn = document.getElementById("myBtn");
+
+    function myFunction() {
+      if (video.paused) {
+        video.play();
+        btn.innerHTML = "Pause";
+      } else {
+        video.pause();
+        btn.innerHTML = "Play";
+      }
+    }
+  </script>
 </body>
 
-</html>
-<!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script><script  src="js/navbar.js"></script>
-
-</body>
 </html>

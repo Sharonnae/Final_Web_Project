@@ -60,11 +60,11 @@
               <div class="mr-2" style="border-radius: 50%; width: 40px; height: 40px; overflow: hidden;">
                 <img src="/avatar/<%= appointment.patientAvatar %>" style="width: 100%; height: 100%;">
               </div>
-              <a href="#" style="text-decoration: underline;"><%= appointment.patientName %></a>
+              <%= appointment.patientName %>
             </div>
-            <div id="appointment_date" class="col-3 d-flex align-items-center">
+            <div class="col-3 d-flex align-items-center">
+              <%= appointment.dateTime %>
             </div>
-            <input type="text" id="date_temp" value="<%= appointment.dateTime %>" hidden>
             <div class="col-3 d-flex align-items-center">
               <%= appointment.patientPhone %>
             </div>

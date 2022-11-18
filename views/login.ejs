@@ -38,6 +38,7 @@
       <div class="nav right">
         <a href="/" class="nav-link"><span class="nav-link-span"><span class="u-nav">Home</span></span></a>
         <a href="/login" class="nav-link active"><span class="nav-link-span"><span class="u-nav">Login</span></span></a>
+        <a href="/signup" class="nav-link"><span class="nav-link-span"><span class="u-nav">Signup</span></span></a>
       </div>
     </nav>
   </header>
@@ -81,12 +82,30 @@
       <input type="text" id="logout" value="<%= status %>" hidden>
     <% } %>
   </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
 <script>
   const logoutField = document.getElementById('logout')
   if (logoutField) {
     document.cookie = "token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
     window.location.href = '/login'
   }
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault()
+    const formData = new FormData(e.target)
+
+    const res = await axios.post('/login', formData)
+    localStorage.setItem('hospital_token', res.data.token)
+    document.cookie = `token=${res.data.token}`
+    if (res.data.role === 'admin') {
+      window.location.href = '/admin'
+    }
+    if (res.data.role === 'doctor') {
+      window.location.href = '/doctor'
+    }
+    if (res.data.role === 'patient') {
+      window.location.href = '/patient'
+    }
+  })
 </script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script><script  src="/js/navbar.js"></script>
 

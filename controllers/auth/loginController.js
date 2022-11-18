@@ -29,23 +29,24 @@ const loginUser = async (req, res) => {
                     }
                 )
                 if (user.role === 'admin') {
-                    res.render('adminDashboard', {
+                    res.json({
                         status: 'success',
+                        role: 'admin', 
                         token: token
                     })
                 } else if (user.role === 'doctor') {
                     const appointments = await Appointment.find({ doctorId: user._id })
-                    res.render('doctorDashboard', {
+                    res.json({
                         status: 'success',
                         token: token,
-                        appointments: appointments
+                        role: 'doctor'
                     })
                 } else if (user.role === 'patient') {
                     const doctors = await User.find({ role: 'doctor' })
-                    res.render('patientDashboard', {
+                    res.json({
                         status: 'success',
                         token: token,
-                        doctors: doctors
+                        role: 'patient'
                     })
                 }
             } else {
