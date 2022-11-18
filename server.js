@@ -32,6 +32,7 @@ app.use('/iwantsee', require('./routes/auth/test'));
 app.use('/login', require('./routes/auth/login'));
 app.use('/logout', require('./routes/auth/logout'));
 app.use('/signup', require('./routes/auth/signup'));
+app.use('/news', require('./routes/news'));
 app.use('/admin', require('./routes/admin'))
 app.use('/doctor', require('./routes/doctor'))
 app.use('/patient', require('./routes/patient'))

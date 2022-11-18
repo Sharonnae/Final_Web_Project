@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hospital Management System</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"
+    integrity="sha256-PF6MatZtiJ8/c9O9HQ8uSUXr++R9KBYu4gbNG5511WE=" crossorigin="anonymous" />
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="stylesheet" href="/css/navbar.css">
+  <link rel="stylesheet" href="/css/news.css">
+
+</head>
+
+  <body>
+    <header id="nav-wrapper">
+      <nav id="nav">
+        <div class="nav left">
+          <span class="gradient skew">
+            <h1 class="logo un-skew"><a href="/">
+                HMS
+              </a></h1>
+          </span>
+          <button id="menu" class="btn-nav"><span class="fas fa-bars"></span></button>
+        </div>
+        <div class="nav right">
+          <a href="/" class="nav-link"><span class="nav-link-span"><span class="u-nav">Home</span></span></a>
+          <a href="/news" class="nav-link active"><span class="nav-link-span"><span class="u-nav">News</span></span></a>
+          <a href="/login" class="nav-link"><span class="nav-link-span"><span class="u-nav">Login</span></span></a>
+          <a href="/signup" class="nav-link"><span class="nav-link-span"><span class="u-nav">Signup</span></span></a>
+        </div>
+      </nav>
+    </header>
+    <main>
+        <div class="news-container">
+            <% 
+                    function formatDate(date) {
+                        var hours = date.getHours();
+                        var minutes = date.getMinutes();
+                        var ampm = hours >= 12 ? "pm" : "am";
+                        hours = hours % 12;
+                        hours = hours ? hours : 12; // the hour '0' should be '12'
+                        minutes = minutes < 10 ? "0" + minutes : minutes;
+                        var strTime = hours + ":" + minutes + " " + ampm;
+                        return (
+                            date.getMonth() +
+                            1 +
+                            "/" +
+                            date.getDate() +
+                            "/" +
+                            date.getFullYear() +
+                            "  " +
+                            strTime
+                        );
+                    }
+                %>
+            <div class="user-content" id="userContent">
+                <div class="user-card">
+                    <div>
+                        <img src="<%= userData.profile_image_url %>" style="width: 100px; border-radius: 50%;" alt="logo">
+                    </div>
+                    <div style="margin-top: 15px; margin-bottom: 0;">
+                        <span style="color: black; font-weight: 600; font-size: 18px;">
+                            <%= userData.name %>
+                        </span>
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <span style="color: #403d3d; font-weight: 600; font-size: 14px;">
+                            @<%= userData.screen_name %>
+                        </span>
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <span style="color: black; font-weight: 500; font-size: 14;">
+                            <%= userData.description %>
+                        </span>
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <span style="color: black; font-weight: 600; font-size: 14px; margin-right: 10px;">
+                            <i class="fas fa-map-marker-alt" style="color: black; margin-right: 3px;"></i>
+                            <%= userData.location %>
+                        </span>
+                        <span style="color: black; font-weight: 600; font-size: 14px;">
+                            <i class="far fa-calendar-alt" style="color: black; margin-right: 3px;"></i>
+                            Joined <%= formatDate(new Date(userData.created_at)) %>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="medical-content" id="medicalContent">
+                
+                <% medicalData.forEach(function(data) { %>
+                    <div class="medical-card">
+                        <div class="medical-card-content">
+                            <div style="margin-right: 10px;">
+                                <img src="<%= data.user.profile_image_url %>" style="width: 50px; border-radius: 50%;" alt="logo">
+                            </div>
+                            <div style="margin-left: 10px;">
+                                <div>
+                                    <span style="color: black; font-weight: 600; font-size: 14px;">
+                                        <%= data.user.name %>
+                                    </span>
+                                    <span style="color: #1f1da1; font-weight: 600; font-size: 13px;">
+                                        &nbsp;@<%= data.user.screen_name %>
+                                    </span>
+                                    <span style="color: black; font-weight: 600; font-size: 14px;">
+                                        &nbsp;<%= formatDate(new Date(data.user.created_at)) %>
+                                    </span>
+                                </div>
+                                <div style="padding-top: 10px;">
+                                    <a href="#" rel="noreferrer" style="text-decoration: none; color: black; font-size: 14px;">
+                                        <%= data.text %>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+                
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <h6>About</h6>
+            <p class="text-justify">On an everyday basis, Medinous enables the front office staff to help patients by
+              simplifying the registration, payment and insurance workflows resulting in excellent patient experience
+              and less stress for staff on duty. We are more productive and proficient now than ever before. -
+              Operations Manager
+            </p>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Products</h6>
+            <ul class="footer-links">
+              <li><a hef="#r">
+                  Medinous Spectrum
+                </a></li>
+              <li><a href="#">
+                  Medinous Fusion
+                </a></li>
+              <li><a href="#">
+                  Medinous CliniX
+                </a></li>
+            </ul>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Quick Links</h6>
+            <ul class="footer-links">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Contribute</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Sitemap</a></li>
+            </ul>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Copyright &copy; 2022 All Rights Reserved by
+              <a href="#">HMS</a>.
+            </p>
+          </div>
+
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="social-icons">
+              <li><a class="facebook" href="#"><i class="fab fa-facebook"></i></a></li>
+              <li><a class="twitter" href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a class="dribbble" href="#"><i class="fab fa-dribbble"></i></a></li>
+              <li><a class="linkedin" href="#"><i class="fab fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  <!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+  <script src="js/news.js"></script>
+  <script src="js/navbar.js"></script>
+ 
+</body>
+
+</html>
