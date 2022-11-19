@@ -1,5 +1,6 @@
+// route to loginView and loginUser from loginController.
 const express = require('express');
-const { 
+const {
     loginView,
     loginUser
 } = require('../../controllers/auth/loginController');

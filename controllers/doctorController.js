@@ -30,7 +30,7 @@ const getDoctorData = async (req, res) => {
     })
 }
 
-// recieves a doctor's id and returns it's data into a rendered doctorDashboard.ejs page.
+// recieves a doctor's user id and returns it's data into a rendered doctorDashboard.ejs page.
 const doctorDashboardView = async (req, res) => {
     const { userid } = req.user
     const appointments = await Appointment.find({ doctorId: userid })

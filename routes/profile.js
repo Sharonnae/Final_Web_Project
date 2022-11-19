@@ -1,3 +1,4 @@
+// route uploadAvatar, changePassword, changeProfile from profileController
 const express = require('express');
 const {
     uploadAvatar,

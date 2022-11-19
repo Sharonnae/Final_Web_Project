@@ -1,3 +1,4 @@
+// route to login.ejs file with user that not logged in.
 const express = require('express');
 const router = express.Router();
 

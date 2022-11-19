@@ -1,5 +1,8 @@
+// route to authView, registerUser, loginUser in authController.
+// note the post\ get differences.
+
 const express = require('express');
-const { 
+const {
     authView,
     loginUser,
     registerUser

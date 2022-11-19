@@ -1,5 +1,6 @@
+// route to signupView and signupUser in signupController.
 const express = require('express');
-const { 
+const {
     signupView,
     signupUser
 } = require('../../controllers/auth/signupController');

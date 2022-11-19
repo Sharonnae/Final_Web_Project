@@ -1,3 +1,4 @@
+//route to newsView in newsController
 const express = require('express')
 const {
     newsView
