@@ -1,3 +1,4 @@
+// route homeView from homeController
 const express = require('express')
 const {
     homeView

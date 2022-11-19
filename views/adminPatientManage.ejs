@@ -125,7 +125,7 @@
                     <div class="mr-2" style="border-radius: 50%; width: 40px; height: 40px; overflow: hidden;">
                       <img src="/avatar/<%= patient.avatar %>" style="width: 100%; height: 100%;">
                     </div>
-                      <%= patient.fullname %>
+                    <%= patient.fullname %>
                   </div>
                   <div class="col-2 d-flex align-items-center">
                     <%= patient.gender %>
@@ -143,9 +143,9 @@
                         Edit
                       </button>
                       <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
-                      data-target="#deletePatient<%= patient._id %>">
-                      Delete
-                    </button>
+                        data-target="#deletePatient<%= patient._id %>">
+                        Delete
+                      </button>
                     </div>
 
                     <!-- Modal -->
@@ -174,10 +174,9 @@
                                 <label class="form-control-label" style="color: white;">LOCATION</label>
                                 <input type="text" placeholder="" name="location" value="<%= patient.location %>"
                                   class="form-control places-autocomplete" id="format_address" required>
-                                <input type="text" id="user_lat" value="<%= patient.latitude %>" name="latitude"
+                                <input type="text" id="user_lat" value="<%= patient.latitude %>" name="latitude" hidden>
+                                <input type="text" id="user_lng" value="<%= patient.longitude %>" name="longitude"
                                   hidden>
-                                <input type="text" id="user_lng" value="<%= patient.longitude %>"
-                                  name="longitude" hidden>
                               </div>
                               <div class="form-group">
                                 <label class="form-control-label" style="color: white;">PHONE</label>
@@ -213,13 +212,14 @@
                       aria-labelledby="deletePatient<%= patient._id %>" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content" style="background-color: #79ccc2;">
-                            <div class="modal-body" style="font-size: 20px;">
-                              Remove user?
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-success btn-sm" onclick="deleteUser('<%= patient._id %>')">Delete</button>
-                            </div>
+                          <div class="modal-body" style="font-size: 20px;">
+                            Remove user?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-success btn-sm"
+                              onclick="deleteUser('<%= patient._id %>')">Delete</button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -235,7 +235,6 @@
 </body>
 
 </html>
-<!-- partial -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
 <script
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5-mJU8x096rUj4O9xWNv8MLXTJEHiOWc&libraries=places"></script>
@@ -264,11 +263,11 @@
     }
   })
   async function deleteUser(id) {
-      const res = await axios.get(`/admin/deleteUser/${id}`)
-      if (res.data.status === 'success') {
-        window.location.href = "/admin/patient-manage"
-      }
+    const res = await axios.get(`/admin/deleteUser/${id}`)
+    if (res.data.status === 'success') {
+      window.location.href = "/admin/patient-manage"
     }
+  }
 </script>
 
 </body>

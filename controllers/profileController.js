@@ -1,6 +1,9 @@
-const User = require('../models/User')
-const bcrypt = require("bcrypt");
+// include needed model and module
+const User = require('../models/User') // for user info and password updates
+const bcrypt = require("bcrypt"); // for password handling
 
+// for profile picture upload in profile account page.
+// render doctorProfile or pationtProfile accoridng to user type.
 const uploadAvatar = async (req, res) => {
     const { userid, role } = req.user
     try {
@@ -28,6 +31,7 @@ const uploadAvatar = async (req, res) => {
     }
 }
 
+// recieves a userid an existing password and a new password. if the password is correct, updates to the new one.
 const changePassword = async (req, res) => {
     const { userid } = req.user
     const {
@@ -51,6 +55,7 @@ const changePassword = async (req, res) => {
     })
 }
 
+// update user details according to the given data in the request.
 const changeProfile = async (req, res) => {
     const { userid, role } = req.user
     const {

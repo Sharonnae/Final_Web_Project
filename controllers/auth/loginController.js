@@ -1,14 +1,20 @@
+// include needed modules and models
 const User = require('../../models/User')
 const Appointment = require('../../models/Appointment')
 const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
 
+// when called, render login.ejs page
 const loginView = (req, res) => {
     res.render('login', {
         status: ''
     })
 }
 
+// when called, verify user email and password via the mongodb.
+// for password handling use bcrypt.
+// generate a token to the user for a smarter login.
+// response is rending to the relevant user page according to user role
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
@@ -31,7 +37,7 @@ const loginUser = async (req, res) => {
                 if (user.role === 'admin') {
                     res.json({
                         status: 'success',
-                        role: 'admin', 
+                        role: 'admin',
                         token: token
                     })
                 } else if (user.role === 'doctor') {

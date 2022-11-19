@@ -3,23 +3,16 @@ const Appointment = require("../models/Appointment");
 const axios = require("axios");
 
 const useMedicalService = async (req, res) => {
-  const options = {
-    method: 'GET',
-    url: 'https://healthy.p.rapidapi.com/symptoms/clinicalstudies',
-    headers: {
-      'X-RapidAPI-Key': '024a27d6abmshd9b33958cfe143dp1993d0jsnef3aca747e95',
-      'X-RapidAPI-Host': 'healthy.p.rapidapi.com'
-    }
-  };
-  
-  axios.request(options).then(function (response) {
-    console.log(response.data);
-  }).catch(function (error) {
-    console.error(error);
-  });
+
+  res.json({
+    data: covid.data
+  })
 }
 
+// display main admin management dasshboard with covid-19 info. 
 const adminDashboardView = async (req, res) => {
+  var api = 'https://disease.sh/v3/covid-19/nyt/usa';
+  const covid = (await axios.get(api)).data
   const appointmentData = await Appointment.aggregate([
     {
       $sort: { createdAt: 1 },
@@ -50,9 +43,11 @@ const adminDashboardView = async (req, res) => {
   res.render("adminDashboard", {
     appointment: aData,
     patient: pData,
+    data: covid.filter((a, index) => index % 7 === 0)
   });
 };
 
+// render adminDoctorManage.ejs to view all doctors management dashboard.
 const adminDoctorManageView = async (req, res) => {
   const doctors = await User.find({ role: "doctor" });
   res.render("adminDoctorManage", {
@@ -60,6 +55,7 @@ const adminDoctorManageView = async (req, res) => {
   });
 };
 
+// render adminPatientManage.ejs to view all patients management dashboard.
 const adminPatientManageView = async (req, res) => {
   const patients = await User.find({ role: "patient" });
   res.render("adminPatientManage", {
@@ -67,6 +63,7 @@ const adminPatientManageView = async (req, res) => {
   });
 };
 
+// create a new doctor with given info 
 const addDoctor = async (req, res) => {
   const {
     fullname,
@@ -106,6 +103,7 @@ const addDoctor = async (req, res) => {
   }
 };
 
+// update doctor info accorinng to given data
 const updateDoctor = async (req, res) => {
   const {
     id,
@@ -162,6 +160,7 @@ const updateDoctor = async (req, res) => {
   }
 };
 
+// update patient info accorinng to given data
 const updatePatient = async (req, res) => {
   console.log(req.body);
   const {
@@ -216,6 +215,7 @@ const updatePatient = async (req, res) => {
   }
 };
 
+// create a new patient with given info 
 const addPatient = async (req, res) => {
   console.log("a", req.body);
   const {
@@ -254,6 +254,7 @@ const addPatient = async (req, res) => {
   }
 };
 
+// delete an existing user.
 const deleteUser = async (req, res) => {
   const { id } = req.params;
   await User.deleteOne({ _id: id });
@@ -261,48 +262,6 @@ const deleteUser = async (req, res) => {
     status: "success",
   });
 };
-
-// const getAppointmentStatisticData = async (req, res) => {
-//   Appointment.aggregate([
-//     {
-//       $group: {
-//         _id: {$dateToString: {format: "%Y-%m", date: '$createdAt'}},
-//         count: {$sum: 1}
-//       }
-//     }
-//   ], function(err, result) {
-//     if (err) {
-//       res.send(err)
-//     } else {
-//       res.json(result)
-//     }
-//   })
-// }
-
-// const getPatientStatisticData = async (req, res) => {
-//   const
-//   User.aggregate([
-//     {
-//       $match: {role: 'patient'}
-//     },
-//     {
-//       $group: {
-//         _id: {$dateToString: {format: "%Y-%m-%d", date: '$createdAt'}},
-//         count: {$sum: 1}
-//       }
-//     }
-//   ], function(err, result) {
-//     if (err) {
-//       res.send(err)
-//     } else {
-//       res.json(result)
-//     }
-//   })
-//   // res.json({
-//   //   patientStatistic: patients,
-//   //   appointmentStatistic: appointments
-//   // })
-// }
 
 module.exports = {
   adminDashboardView,

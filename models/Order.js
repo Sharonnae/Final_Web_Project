@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// create an appointment order schema
 const OrderSchema = new mongoose.Schema({
   patientName: {
     type: String,
@@ -79,5 +80,6 @@ const OrderSchema = new mongoose.Schema({
   }
 });
 
+// Compile model from schema
 const Order = mongoose.model("Order", OrderSchema);
 module.exports = Order;

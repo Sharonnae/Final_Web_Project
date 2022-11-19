@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"); // to interact with mongodb
 
+// create an appointment scheme
 const AppointmentSchema = new mongoose.Schema({
   patientName: {
     type: String,
@@ -79,5 +80,6 @@ const AppointmentSchema = new mongoose.Schema({
   }
 });
 
+// Compile model from schema
 const Appointment = mongoose.model("Appointment", AppointmentSchema);
 module.exports = Appointment;
